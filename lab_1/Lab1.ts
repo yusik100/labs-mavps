@@ -1,5 +1,5 @@
 interface User {
-  user_id: number;
+  user_id: string;
   name: string;
   email: string;
   password: string;
@@ -10,41 +10,41 @@ interface User {
 }
 
 interface Subscription {
-  subscription_id: number;
+  subscription_id: string;
   type: string;
   price: number;
   start_date: Date;
   end_date: Date;
-  user_id: number;
+  user_id: string;
 
   user?: User;
 }
 
 interface Playlist {
-  playlist_id: number;
+  playlist_id: string;
   title: string;
   created_at: Date;
-  user_id: number;
+  user_id: string;
 
   user?: User;
   playlistTracks?: PlaylistTrack[];
 }
 
 interface PlaylistTrack {
-  playlistTrack_id: number;
-  playlist_id: number;
-  track_id: number;
+  playlistTrack_id: string;
+  playlist_id: string;
+  track_id: string;
 
   playlist?: Playlist;
   track?: Track;
 }
 
 interface Track {
-  track_id: number;
+  track_id: string;
   title: string;
   duration: number;
   release_date: Date;
-  album_id: number;
+  album_id: string;
 
   playlistTracks?: PlaylistTrack[];
   trackArtists?: TrackArtist[];
@@ -52,16 +52,16 @@ interface Track {
 }
 
 interface TrackArtist {
-  trackArtist_id: number;
-  track_id: number;
-  artist_id: number;
+  trackArtist_id: string;
+  track_id: string;
+  artist_id: string;
 
   track?: Track;
   artist?: Artist;
 }
 
 interface Artist {
-  artist_id: number;
+  artist_id: string;
   stage_name: string;
   country: string;
   genre: string;
@@ -71,7 +71,7 @@ interface Artist {
 }
 
 interface Album {
-  album_id: number;
+  album_id: string;
   title: string;
   release_year: number;
 
@@ -80,9 +80,9 @@ interface Album {
 }
 
 interface AlbumArtist {
-  albumArtist_id: number;
-  album_id: number;
-  artist_id: number;
+  albumArtist_id: string;
+  album_id: string;
+  artist_id: string;
 
   artist?: Artist;
   album?: Album;
