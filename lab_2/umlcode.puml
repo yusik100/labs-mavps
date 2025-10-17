@@ -1,0 +1,75 @@
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Artist" as Artist
+
+User --> (Register as a user)
+User --> (Search for music)
+User --> (Buy a subscription)
+
+(Register as a user) <|-- (Register via email/phone number and password): extends
+(Register as a user) <|-- (Register via google account and password): extends
+
+(Log in as a user) ..> (Register as a user): use
+
+(Log in as a user) <|-- (Log in via login and password): extends
+(Log in as a user) <|-- (Log in via google account and password): extends
+(Log in as a user) <|-- (Log in via email/phone number and password): extends
+
+(Search for music) ..> (Log in as a user): use
+
+(Search for music) <|-- (Search for music by track title): extends
+(Search for music) <|-- (Search for music by album title): extends
+(Search for music) <|-- (Search for music by playlisr title): extends
+(Search for music) <|-- (Search for music by artist): extends
+(Search for music) <|-- (Search for music by genre): extends
+
+(Listen to music) ..> (Search for music): use
+(Create playlists) ..> (Search for music): use
+(Like music) ..> (Search for music): use
+(Manage playlists) ..> (Create playlists): use
+
+(Manage playlists) <|-- (Add more tracks to playlists): extends
+(Manage playlists) <|-- (Remove tracks from playlists): extends
+(Manage playlists) <|-- (Rename playlists): extends
+
+(Like music) <|-- (Like albums): extends
+(Like music) <|-- (Like tracks): extends
+(Like music) <|-- (Like playlists): extends
+
+(Buy a subscription) <|-- (Buy a premium subcription): extends
+(Buy a subscription) <|-- (Buy a family subcription): extends
+
+(Buy a subscription) ..> (Log in as a user): use
+
+Artist --> (Register as an artist)
+Artist --> (Upload music)
+Artist --> (Receive monetization for streams)
+Artist --> (View statistics)
+
+(Upload music) <|-- (Upload single tracks): extends
+(Upload music) <|-- (Upload albums): extends
+
+(Edit uploaded music) ..> (Upload music): use
+(Log in as an artist) ..> (Register as an artist): use
+
+(Register as an artist) <|-- (Register via email/phone number and password): extends
+(Register as an artist) <|-- (Register via google account and password): extends
+
+(Log in as an artist) <|-- (Log in via login and password): extends
+(Log in as an artist) <|-- (Log in via google account and password): extends
+(Log in as an artist) <|-- (Log in via email/phone number and password): extends
+
+(Edit uploaded music) <|-- (Delete uploaded music): extends
+(Edit uploaded music) <|-- (Update information): extends
+
+(Receive monetization for streams) ..> (Log in as an artist): use
+(Receive monetization for streams) ..> (Upload music): use
+(Receive monetization for streams) ..> (Listen to music): use
+
+(Search for music) ..> (Upload music): use
+(View statistics) ..> (Like music): use
+(View statistics) ..> (Listen to music): use
+
+@enduml
