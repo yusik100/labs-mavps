@@ -1,0 +1,47 @@
+@startuml
+skinparam responseMessageBelowArrow true
+autonumber
+
+actor "Користувач" as User
+participant "Додаток" as Client
+participant "Сервер" as Server
+database "База\nДаних" as DB
+
+title Sequence Diagram: Прослуховування музики
+
+User -> Client: Натискає кнопку "Play"
+activate Client
+
+Client -> Server: Запит на отримання треку
+activate Server
+
+Server -> DB: Перевірити статус підписки UserID
+activate DB
+DB --> Server: Статус (Active / Inactive)
+deactivate DB
+
+alt Підписка активна
+    Server -> DB: Запит шляху до файлу треку
+    activate DB
+    DB --> Server: Повертає посилання на файл
+    deactivate DB
+    
+    Server --> Client: Повертає аудіопотік (Stream)
+    Client -> User: Відтворює музику
+else Підписка неактивна
+    Server --> Client: Повертає аудіорекламу
+    Client -> User: Відтворює рекламу
+    
+    Client -> Server: Повторний запит треку (після реклами)
+    Server -> DB: Запит шляху до файлу треку
+    activate DB
+    DB --> Server: Повертає посилання на файл
+    deactivate DB
+    
+    Server --> Client: Повертає аудіопотік (Stream)
+    Client -> User: Відтворює музику
+end
+
+deactivate Server
+deactivate Client
+@enduml
